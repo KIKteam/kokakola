@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coca-Cola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+    .intro {
+      height: 100vh;
+      background: radial-gradient(circle at center, #ff0000, black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-direction: column;
+    }
+    .logo-circle {
+      width: 200px;
+      height: 200px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px red;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+    .logo-circle img {
+      width: 120px;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 60px red;
+      }
+      50% {
+        box-shadow: 0 0 90px #ff4d4d;
+      }
+    }
+    .main {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    h1.neon {
+      font-size: 2.5em;
+      color: white;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+      margin-bottom: 40px;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product-card {
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #ff000044;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 220px;
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px red;
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .feature {
+      max-width: 200px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #222;
+      color: white;
+    }
+    .contact-form button {
+      background: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cta {
+      margin-top: 40px;
+    }
+    .cta a {
+      background: red;
+      color: white;
+      padding: 12px 30px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .cta a:hover {
+      background: #ff4d4d;
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background: #ff0000;
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      position: relative;
+      width: 300px;
+      text-align: center;
+    }
+    .modal-content img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro" id="intro">
+    <div class="logo-circle" onclick="startExperience()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Coca-Cola_logo_white.png" alt="Coca-Cola" />
+    </div>
+  </div>
+
+  <div class="main" id="main">
+    <section>
+      <h1 class="neon">Open the Taste of Happiness</h1>
+    </section>
+
+    <section class="products">
+      <div class="product-card" onclick="showFlavor('Original')">
+        <img src="https://i.imgur.com/2JgkKJx.png" alt="Original">
+        <h3>Original Taste</h3>
+      </div>
+      <div class="product-card" onclick="showFlavor('Zero')">
+        <img src="https://i.imgur.com/yoEcPa0.png" alt="Zero">
+        <h3>Zero Sugar</h3>
+      </div>
+      <div class="product-card" onclick="showFlavor('Vanilla')">
+        <img src="https://i.imgur.com/CEpvTSR.png" alt="Vanilla">
+        <h3>Vanilla</h3>
+      </div>
+      <div class="product-card" onclick="showFlavor('Cherry')">
+        <img src="https://i.imgur.com/jZxkNzx.png" alt="Cherry">
+        <h3>Cherry</h3>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h3>Unforgettable Taste</h3>
+        <p>Experience the refreshing and timeless flavor of Coca-Cola.</p>
+      </div>
+      <div class="feature">
+        <h3>Feel the Emotion</h3>
+        <p>Every sip brings joy, nostalgia, and happiness.</p>
+      </div>
+      <div class="feature">
+        <h3>Iconic Brand</h3>
+        <p>Recognized around the world, loved by generations.</p>
+      </div>
+    </section>
+
+    <section class="contact-form">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <section class="cta">
+      <a href="https://t.me/kikteamhubeducation" target="_blank">Order This Site</a>
+    </section>
+  </div>
+
+  <div class="modal" id="flavorModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="flavorImg" src="" alt="">
+      <h2 id="flavorTitle"></h2>
+      <p id="flavorDesc"></p>
+    </div>
+  </div>
+
+  <script>
+    const flavorData = {
+      Original: {
+        img: 'https://e7.pngegg.com/pngimages/742/816/png-clipart-coke-coke-drink-thumbnail.png',
+        title: 'Coca-Cola Original',
+        desc: 'The classic, beloved taste of Coca-Cola — refreshing and timeless.'
+      },
+      Zero: {
+        img: 'https://icon2.cleanpng.com/20180629/krv/aaytjg8pi.webp',
+        title: 'Coca-Cola Zero Sugar',
+        desc: 'Same great Coca-Cola taste with zero sugar.'
+      },
+      Vanilla: {
+        img: 'https://www.pngkey.com/png/full/477-4773780_coca-cola-vanilla-.png',
+        title: 'Coca-Cola Vanilla',
+        desc: 'A smooth and creamy vanilla twist to the original Coca-Cola flavor.'
+      },
+      Cherry: {
+        img: "https://www.pikpng.com/pngl/b/242-2425688_cherry-coke-png-cherry-coke-clipart.png",
+        title: 'Coca-Cola Cherry',
+        desc: 'Bold cherry flavor blended with Coca-Cola’s unique taste.'
+      }
+    };
+
+    function startExperience() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+    }
+
+    function showFlavor(type) {
+      const modal = document.getElementById('flavorModal');
+      document.getElementById('flavorImg').src = flavorData[type].img;
+      document.getElementById('flavorTitle').innerText = flavorData[type].title;
+      document.getElementById('flavorDesc').innerText = flavorData[type].desc;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('flavorModal').style.display = 'none';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
